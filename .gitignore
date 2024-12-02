@@ -1,0 +1,43 @@
+# Ignore build outputs
+*/bin/
+*/obj/
+
+# User-specific files
+.vs/
+.idea/
+.vscode/
+
+# ASP.NET Core
+wwwroot/
+
+# Rider and Visual Studio for Mac
+.idea/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# JetBrains Rider files
+.idea/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# DotNet Core specific
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# .NET core tools cache
+.npm/
+.yarn/
+.vscode/
+
+# Logs and other temporary files
+*.log
+*.bak
