@@ -1,6 +1,7 @@
 ﻿namespace WebSocketStandards;
 
-public static class Standards {
-    private static ushort _frameSize = 65535;
-    public static ushort FrameSize { get => _frameSize; }
+public static class Standards
+{
+  public const uint FrameSize = 524288; // in bytes
+  public static readonly string Delimiter = "\r\n\r\n";
 }
