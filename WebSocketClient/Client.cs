@@ -48,8 +48,9 @@ public static class Program
     }
   }
 
-  private static async Task SendMessage(ClientWebSocket webSocket, byte[] data)
+  private static async Task SendMessage(ClientWebSocket webSocket, byte[] data
+  )
   {
-    await webSocket.SendAsync(new ArraySegment<byte>(data, 0, data.Length), WebSocketMessageType.Binary, false, CancellationToken.None);
+    await webSocket.SendAsync(new ArraySegment<byte>(data, 0, data.Length), WebSocketMessageType.Binary, true, CancellationToken.None);
   }
 }
