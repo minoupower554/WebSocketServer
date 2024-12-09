@@ -16,10 +16,12 @@ public static class Program
     Uri uri = new("ws://localhost:8080");
     ClientWebSocket webSocket = new();
     await webSocket.ConnectAsync(uri, CancellationToken.None);
-    
+    await using (FileStream fs = new FileStream("test_data.txt", FileMode.Open, FileAccess.Read, FileShare.Read)) {
+      foreach (Tuple<byte[], int, bool> data in PrepareMessage(, fs)
+    }
   }
 
-  private static IEnumerable<Tuple<byte[], int>> PrepareMessage(string fileId, FileStream fileData)
+  private static IEnumerable<Tuple<byte[], int, bool>> PrepareMessage(string fileId, FileStream fileData)
   {
     long dataLength = fileData.Length;
     int maxChunks = (int)Math.Ceiling((double)dataLength / Standards.FrameSize);
@@ -43,7 +45,7 @@ public static class Program
       Buffer.BlockCopy(byteHeader, 0, data, 0, byteHeader.Length);
       previouslyReadCount = fileData.Read(buffer, 0, data.Length - byteHeader.Length);
       Buffer.BlockCopy(buffer, 0, data, byteHeader.Length, buffer.Length);
-      yield return new Tuple<byte[], int>(data, previouslyReadCount);
+      yield return new Tuple<byte[], int, bool>(data, previouslyReadCount, chunkIndex >= maxChunks);
       Array.Clear(data);
     }
   }
